@@ -1,0 +1,19 @@
+# Build stage for Blazor WebAssembly
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+# Copy and restore dependencies
+COPY ["src/Pastebin.Client/Pastebin.Client.csproj", "src/Pastebin.Client/"]
+RUN dotnet restore "src/Pastebin.Client/Pastebin.Client.csproj"
+
+# Copy the rest of the source code
+COPY . .
+
+# Build and publish the Blazor WebAssembly app
+WORKDIR "/src/src/Pastebin.Client"
+RUN dotnet publish "Pastebin.Client.csproj" -c Release -o /app/publish
+
+# Runtime stage using nginx to serve static files
+FROM nginx:alpine AS final
+COPY --from=build /app/publish/wwwroot /usr/share/nginx/html
+EXPOSE 80
