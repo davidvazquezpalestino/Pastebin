@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Pastebin.Api/Pastebin.Api.csproj" />
+    <Project Path="src/Pastebin.Client/Pastebin.Client.csproj" />
+    <Project Path="src/Pastebin.Core/Pastebin.Core.csproj" />
+    <Project Path="src/Pastebin.Infrastructure/Pastebin.Infrastructure.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,71 @@
+@page "/"
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@using Pastebin.Client.Services
+@inject PasteService PasteService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Pastebin - Crear nuevo paste</PageTitle>
+
+
+<div class="h-100 d-flex flex-column">
+    <div class="container-fluid flex-grow-1 d-flex flex-column">
+        <div class="row flex-grow-1">
+            <div class="col-12 d-flex flex-column">
+                <div class="card flex-grow-1 d-flex flex-column">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h3>Nuevo Paste</h3>
+                        <a href="history" class="btn btn-light btn-sm">Ver Historial</a>
+                    </div>
+                    <div class="card-body flex-grow-1 d-flex flex-column">
+                        <EditForm Model="@CreateRequest" OnValidSubmit="HandleValidSubmit" class="flex-grow-1 d-flex flex-column">
+                            <DataAnnotationsValidator />
+                            <ValidationSummary />
+
+                            <div class="form-group mb-3">
+                                <label for="title" class="form-label">Título (opcional)</label>
+                                <InputText @bind-Value="CreateRequest.Title" id="title" class="form-control" />
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="language" class="form-label">Lenguaje</label>
+                                <InputSelect @bind-Value="CreateRequest.Language" id="language" class="form-control">
+                                    <option value="text">Texto</option>
+                                    <option value="csharp">C#</option>
+                                    <option value="javascript">JavaScript</option>
+                                    <option value="python">Python</option>
+                                    <option value="java">Java</option>
+                                    <option value="cpp">C++</option>
+                                    <option value="html">HTML</option>
+                                    <option value="css">CSS</option>
+                                    <option value="sql">SQL</option>
+                                </InputSelect>
+                            </div>
+
+                            <div class="form-group mb-3 flex-grow-1 d-flex flex-column">
+                                <label for="content" class="form-label">Contenido</label>
+                                <textarea @bind="CreateRequest.Content" id="content" class="form-control flex-grow-1" rows="10" required></textarea>
+                                <ValidationMessage For="@(() => CreateRequest.Content)" />
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-auto">
+                                <button type="submit" class="btn btn-primary" disabled="@IsSubmitting">
+                                    @if (IsSubmitting)
+                                    {
+                                        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                        <span>Guardando...</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Guardar</span>
+                                    }
+                                </button>
+                            </div>
+                        </EditForm>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

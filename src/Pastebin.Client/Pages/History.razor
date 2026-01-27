@@ -1,0 +1,59 @@
+@page "/history"
+@using Microsoft.AspNetCore.Components.Web
+@using Pastebin.Client.Models
+@using Pastebin.Client.Services
+@inject PasteService PasteService
+
+<PageTitle>Pastebin - Historial</PageTitle>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+                    <h3>Historial de Pastes</h3>
+                    <a href="" class="btn btn-light btn-sm">
+                        <i class="bi bi-arrow-left"></i> Regresar
+                    </a>
+                </div>
+                <div class="card-body">
+                    @if (Pastes == null)
+                    {
+                        <div class="text-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                            </div>
+                            <p>Cargando historial...</p>
+                        </div>
+                    }
+                    else if (!Pastes.Any())
+                    {
+                        <p>No hay pastes disponibles.</p>
+                    }
+                    else
+                    {
+                        <div class="list-group">
+                            @foreach (PasteResponse paste in Pastes.OrderByDescending(p => p.CreatedAt))
+                            {
+                                <div class="list-group-item">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">@paste.Title</h5>
+                                        <small>@paste.CreatedAt.ToString("g")</small>
+                                    </div>
+                                    <p class="mb-1">@(paste.Content.Length > 100 ? paste.Content.Substring(0, 100) + "..." : paste.Content)</p>
+                                    <small>
+                                        <a href="@paste.Url" class="btn btn-sm btn-outline-primary">Ver</a>
+                                        @if (paste.ExpirationDate.HasValue)
+                                        {
+                                            <span class="ms-2 text-muted">Expira: @paste.ExpirationDate.Value.ToString("g")</span>
+                                        }
+                                    </small>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

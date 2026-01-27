@@ -1,0 +1,57 @@
+@page "/paste/{Id}"
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.JSInterop
+@using Pastebin.Client.Services
+@inject PasteService PasteService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+
+<PageTitle>Pastebin - @Paste?.Title</PageTitle>
+
+@if (IsLoading)
+{
+    <div class="text-center mt-5">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p>Cargando paste...</p>
+    </div>
+}
+else if (Paste == null)
+{
+    <div class="alert alert-danger mt-5" role="alert">
+        No se encontró el paste o ha expirado.
+    </div>
+}
+else
+{
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3>@Paste.Title</h3>
+                        <div>
+                            <button class="btn btn-sm btn-outline-secondary me-2" @onclick="CopyToClipboard">
+                                <i class="bi bi-clipboard"></i> Copiar
+                            </button>
+                            <a href="" class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-arrow-left"></i> Regresar
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <small class="text-muted">Creado: @Paste.CreatedAt.ToString("g")</small>
+                            @if (Paste.ExpirationDate.HasValue)
+                            {
+                                <span class="ms-3 text-muted">Expira: @Paste.ExpirationDate.Value.ToString("g")</span>
+                            }
+                        </div>
+                        <pre class="p-3 bg-light rounded"><code class="@GetLanguageClass(Paste.Language)">@Paste.Content</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

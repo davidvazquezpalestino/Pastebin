@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Pastebin.Api": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ClientUrl": "https://localhost:58179"
+      },
+      "applicationUrl": "https://localhost:58178;http://localhost:58180"
+    }
+  }
+}
