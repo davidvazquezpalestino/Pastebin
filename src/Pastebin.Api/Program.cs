@@ -42,6 +42,10 @@ builder.Services.Configure<PastebinSettings>(builder.Configuration.GetSection("P
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Add health checks
+builder.Services.AddHealthChecks()
+    .AddDbContextCheck<PastebinDbContext>();
+
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -49,11 +53,12 @@ WebApplication app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-
 app.UseHttpsRedirection();
 app.UseCors();
 app.UseAuthorization();
 app.MapControllers();
 
+// Map health check endpoint
+app.MapHealthChecks("/health");
 
 app.Run();
