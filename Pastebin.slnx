@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Elementos de la solución/">
-    <File Path="Dockerfile" />
+    <File Path="C:/Users/vazqu/Downloads/docker-compose.yml" />
+    <File Path="Dockerfile.Api" />
     <File Path="Dockerfile.Client" />
   </Folder>
   <Folder Name="/src/">
