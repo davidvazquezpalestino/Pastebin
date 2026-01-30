@@ -10,9 +10,20 @@ COPY . .
 WORKDIR /src/src/Pastebin.Client
 RUN dotnet publish -c Release -o /app/publish
 
-# Stage Nginx
+# =========================
+# ETAPA 2: NGINX (FINAL)
+# =========================
 FROM nginx:alpine
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/publish/wwwroot /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html
+
+# Limpiar html default
+RUN rm -rf ./*
+
+# Copiar archivos publicados
+COPY --from=build /app/publish/wwwroot/ .
+
+# Copiar configuración global completa
+COPY nginx.conf /etc/nginx/nginx.conf
+
 EXPOSE 80
-EXPOSE 443
+CMD ["nginx", "-g", "daemon off;"]

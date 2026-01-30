@@ -4,7 +4,7 @@ WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.Services.AddScoped(sp =>
     new HttpClient
     {
-        BaseAddress = new Uri("https://api-pastes.azurewebsites.net")
+        BaseAddress = new Uri("https://pastebin.infosoft.mx/")
     });
 
 // Registrar el servicio de pastes
