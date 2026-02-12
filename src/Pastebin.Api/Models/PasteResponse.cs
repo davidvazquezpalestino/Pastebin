@@ -1,5 +1,3 @@
-using Pastebin.Core.Domain;
-
 namespace Pastebin.Api.Models
 {
     public class PasteResponse
@@ -21,13 +19,13 @@ namespace Pastebin.Api.Models
 
             return new PasteResponse
             {
-                Id = paste.Id,
+                Id = paste.PasteID,
                 Title = paste.Title,
                 Language = paste.Language,
                 Content = paste.Content,
                 CreatedAt = paste.CreatedAt,
                 ExpirationDate = paste.ExpirationDate,
-                Url = $"{baseUrl}/api/pastes/{paste.Id}"
+                Url = $"{baseUrl}/api/pastes/{paste.PasteID}"
             };
         }
     }

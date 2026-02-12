@@ -2,7 +2,7 @@ namespace Pastebin.Core.Domain
 {
     public class Paste
     {
-        public string Id { get; private set; }
+        public string PasteID { get; private set; }
         public string Title { get; private set; }
         public string Language { get; private set; }
         public string Content { get; private set; }
@@ -21,7 +21,7 @@ namespace Pastebin.Core.Domain
 
             return new Paste
             {
-                Id = Guid.NewGuid().ToString("N"),
+                PasteID = Guid.NewGuid().ToString("N"),
                 Title = string.IsNullOrWhiteSpace(title) ? "Untitled" : title,
                 Language = string.IsNullOrWhiteSpace(language) ? "text" : language,
                 Content = content,

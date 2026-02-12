@@ -1,5 +1,3 @@
-using Pastebin.Core.Domain;
-
 namespace Pastebin.Api.Controllers
 {
     [ApiController]
@@ -24,7 +22,7 @@ namespace Pastebin.Api.Controllers
 
             return CreatedAtAction(
                 nameof(GetPaste),
-                new { id = paste.Id },
+                new { id = paste.PasteID },
                 PasteResponse.FromDomain(paste, baseUrl));
         }
 

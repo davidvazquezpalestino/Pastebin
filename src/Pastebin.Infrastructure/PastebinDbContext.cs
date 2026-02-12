@@ -15,8 +15,8 @@ public class PastebinDbContext : DbContext
     {
         modelBuilder.Entity<Paste>(entity =>
         {
-            entity.HasKey(e => e.Id);
-            entity.Property(e => e.Id).HasMaxLength(32);
+            entity.HasKey(e => e.PasteID);
+            entity.Property(e => e.PasteID).HasMaxLength(32);
             entity.Property(e => e.Title).HasMaxLength(200);
             entity.Property(e => e.Content).IsRequired();
             entity.Property(e => e.Language).HasMaxLength(50);

@@ -23,3 +23,7 @@ EXPOSE 443
 ENTRYPOINT ["dotnet", "Pastebin.Api.dll"]
 
 
+#docker build -t img-api-pastebin:v1 -f Dockerfile.Api .
+#docker run -d -p 8050:80 --name api-pastebin img-api-pastebin:v1
+
+

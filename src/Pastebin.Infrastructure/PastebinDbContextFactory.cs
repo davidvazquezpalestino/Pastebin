@@ -7,7 +7,7 @@ public class PastebinDbContextFactory : IDesignTimeDbContextFactory<PastebinDbCo
     public PastebinDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<PastebinDbContext>();
-        optionsBuilder.UseSqlServer("Server=74.208.218.86;Database=Pastebin;User Id=sa;Password=MSsql2026;MultipleActiveResultSets=true;encrypt=false;");
+        optionsBuilder.UseSqlServer("Server=74.208.218.86;Database=Pastebin;User ID=Pastebin;Password=Pastebin2026#;MultipleActiveResultSets=true;encrypt=false;");
 
         return new PastebinDbContext(optionsBuilder.Options);
     }
