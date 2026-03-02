@@ -1,9 +1,9 @@
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+﻿FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 # Copiar proyecto y restaurar
-COPY src/Pastebin.Client/Pastebin.Client.csproj src/Pastebin.Client/
-RUN dotnet restore src/Pastebin.Client/Pastebin.Client.csproj
+COPY src/Pastebin.Client/Pastebin.Client.csproj src/Pastebin.Client/ 
+RUN dotnet restore src/Pastebin.Client/Pastebin.Client.csproj        
 
 # Copiar todo y publicar
 COPY . .
@@ -22,14 +22,8 @@ RUN rm -rf ./*
 # Copiar archivos publicados
 COPY --from=build /app/publish/wwwroot/ .
 
-# Copiar configuraci�n global completa
-COPY nginx.conf /etc/nginx/nginx.conf
+# Copiar configuración global completa
+COPY src/Pastebin.Client/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
-
-
-
-
-#docker build -t img-pastebin:v1 -f Dockerfile.Client .
-#docker run -d -p 8060:80 --name pastebin img-pastebin:v1

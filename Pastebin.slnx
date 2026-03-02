@@ -1,11 +1,6 @@
 <Solution>
   <Folder Name="/Elementos de la solución/">
-    <File Path="../Infosoft.Frontend.BlazorWeb/nginx.conf" />
-    <File Path="C:/Users/vazqu/Downloads/docker-compose.yml" />
-    <File Path="deployApi.sh" />
-    <File Path="deployApp.sh" />
-    <File Path="Dockerfile.Api" />
-    <File Path="Dockerfile.Client" />
+    <File Path="docker-compose.yml" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Pastebin.Api/Pastebin.Api.csproj" />

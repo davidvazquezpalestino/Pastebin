@@ -1,3 +1,4 @@
+
 # Build stage
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
@@ -27,3 +28,5 @@ ENTRYPOINT ["dotnet", "Pastebin.Api.dll"]
 #docker run -d -p 8050:80 --name api-pastebin img-api-pastebin:v1
 
 
+#/var/www# cd var/www/api-pastebin/
+#

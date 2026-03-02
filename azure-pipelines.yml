@@ -1,0 +1,39 @@
+trigger:
+- main
+
+resources:
+- repo: self
+
+variables:
+  # Cambia estos valores según tu configuración en Azure DevOps
+  dockerRegistryServiceConnection: 'tu-service-connection'
+  containerRegistry: 'tu-acr.azurecr.io'
+  dockerComposeFile: 'docker-compose.yml'
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: BuildAndPush
+  displayName: 'Build and Push'
+  jobs:
+  - job: DockerBuild
+    displayName: 'Docker Build and Push'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: DockerCompose@0
+      displayName: 'Build images'
+      inputs:
+        containerregistrytype: 'Container Registry'
+        dockerRegistryServiceConnection: '$(dockerRegistryServiceConnection)'
+        dockerComposeFile: '$(dockerComposeFile)'
+        action: 'Build services'
+        additionalImageTags: '$(tag)'
+
+    - task: DockerCompose@0
+      displayName: 'Push images'
+      inputs:
+        containerregistrytype: 'Container Registry'
+        dockerRegistryServiceConnection: '$(dockerRegistryServiceConnection)'
+        dockerComposeFile: '$(dockerComposeFile)'
+        action: 'Push services'
+        additionalImageTags: '$(tag)'

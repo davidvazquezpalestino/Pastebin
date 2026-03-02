@@ -2,15 +2,17 @@ version: "3.9"
 
 services:
   api:
+    image: pastebin-api
     build:
       context: .
-      dockerfile: Dockerfile.Api
+      dockerfile: src/Pastebin.Api/Dockerfile
     ports:
       - "8050:80"
   client:
+    image: pastebin-client
     build:
       context: .
-      dockerfile: Dockerfile.Client
+      dockerfile: src/Pastebin.Client/Dockerfile
     ports:
       - "8060:80"
     depends_on:
