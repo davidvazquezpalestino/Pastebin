@@ -26,6 +26,7 @@ stages:
         containerregistrytype: 'Container Registry'
         dockerRegistryServiceConnection: '$(dockerRegistryServiceConnection)'
         dockerComposeFile: '$(dockerComposeFile)'
+        projectName: 'pastebin'
         action: 'Build services'
         additionalImageTags: '$(tag)'
 
@@ -35,5 +36,6 @@ stages:
         containerregistrytype: 'Container Registry'
         dockerRegistryServiceConnection: '$(dockerRegistryServiceConnection)'
         dockerComposeFile: '$(dockerComposeFile)'
+        projectName: 'pastebin'
         action: 'Push services'
         additionalImageTags: '$(tag)'
